@@ -2524,9 +2524,7 @@ popover.background {
  *************/
 
 %tabs_tab {
-  transition: $transition,
-    background-size 0ms,
-    background-image 0ms;
+  transition: $transition, background-size 0ms, background-image 0ms;
   min-height: $small-size;
   min-width: $small-size;
   padding: $space-size / 2 $space-size;
@@ -2715,6 +2713,12 @@ notebook {
           }
         }
 
+        > tab {
+          &:not(:first-child) {
+            margin-left: $space-size / 2;
+          }
+        }
+
         tab.reorderable-page {
           border-style: solid;
         }
@@ -2734,6 +2738,12 @@ notebook {
 
           &:last-child {
             margin-bottom: 0;
+          }
+        }
+
+        > tab {
+          &:not(:first-child) {
+            margin-top: $space-size / 2;
           }
         }
 
@@ -4006,7 +4016,9 @@ listview.view {
         margin: 0;
         background-color: transparent;
         color: $titlebar-text-secondary;
-      } @else {
+      }
+
+      @else {
         background-color: $sidebg;
         color: on($sidebg);
         margin: 0 0 $menu-radius 0;
@@ -5482,7 +5494,9 @@ paned {
         margin: 0;
         background-color: transparent;
         color: $titlebar-text-secondary;
-      } @else {
+      }
+
+      @else {
         background-color: $sidebg;
         color: on($sidebg);
         margin: 0 0 $menu-radius 0;
@@ -5748,7 +5762,7 @@ paned {
     }
   }
 
-  &:dir(ltr), &.end:dir(rtl) {
+  &:dir(ltr) {
     &, banner > revealer > widget {
       border: none;
 
@@ -5762,7 +5776,14 @@ paned {
     }
   }
 
-  &:dir(rtl), &.end:dir(ltr) {
+  &.end:dir(rtl) {
+    &, banner > revealer > widget {
+      border: none;
+      box-shadow: inset -1px 0 $border;
+    }
+  }
+
+  &:dir(rtl) {
     &, banner > revealer > widget {
       border: none;
 
@@ -5773,6 +5794,13 @@ paned {
       @else {
         box-shadow: none;
       }
+    }
+  }
+
+  &.end:dir(ltr) {
+    &, banner > revealer > widget {
+      border: none;
+      box-shadow: inset 1px 0 $border;
     }
   }
 
