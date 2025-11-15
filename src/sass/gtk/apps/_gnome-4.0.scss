@@ -1,9 +1,8 @@
-
 //
 // Nautilus
 //
 .nautilus-window {
-  @if $sidebar == 'styled' {
+  @if $sidebar =='styled' {
     &.background {
       background-color: $titlebar;
 
@@ -13,15 +12,17 @@
     }
 
     flap.unfolded > placessidebar {
-      @if $topbar == 'dark' and $variant == 'light' {
+      @if $topbar =='dark' and $variant =='light' {
         margin: 0;
         background-color: transparent;
         color: $titlebar-text-secondary;
-      } @else {
+      }
+
+      @else {
         background-color: $primary;
         color: on($primary);
         margin: 0 0 $modal-radius + $space-size 0;
-        border-radius: 0 $modal-radius + $space-size  $modal-radius + $space-size 0;
+        border-radius: 0 $modal-radius + $space-size $modal-radius + $space-size 0;
       }
 
       > scrolledwindow > viewport {
@@ -29,21 +30,27 @@
           background: none;
           padding: $space-size;
 
-          @if $topbar == 'dark' and $variant == 'light' {
+          @if $topbar =='dark' and $variant =='light' {
             padding-right: $space-size;
-          } @else {
+          }
+
+          @else {
             padding-right: $space-size + 2px;
           }
 
-          > separator { background: none; }
+          > separator {
+            background: none;
+          }
 
           > row.activatable {
             border-radius: $modal-radius;
 
             &, image.sidebar-icon, label.sidebar-label, button.sidebar-button {
-              @if $topbar == 'dark' and $variant == 'light' {
+              @if $topbar =='dark' and $variant =='light' {
                 color: $titlebar-text-secondary;
-              } @else {
+              }
+
+              @else {
                 color: on($primary);
               }
             }
@@ -85,7 +92,7 @@
       }
     }
 
-    @if $variant == 'light' and $topbar == 'dark' {
+    @if $variant =='light' and $topbar =='dark' {
       .sidebar-pane {
         background-color: $titlebar;
         border: none;
@@ -96,26 +103,26 @@
           .box {
             background-color: $titlebar-fill;
           }
-  
+
           &:backdrop .box {
             background-color: $titlebar-fill;
           }
         }
-  
+
         scrolledwindow:not(.pinned) > tabbox {
           tab, tab > button.flat {
             color: $titlebar-text-secondary;
-  
+
             &:hover {
               color: $titlebar-text;
               background-color: $titlebar-fill;
             }
-  
+
             &:active, &:checked, &:selected {
               color: $titlebar-text;
               background-color: $titlebar-divider;
             }
-  
+
             &:disabled {
               color: $titlebar-text-secondary-disabled;
             }
@@ -124,8 +131,10 @@
       }
     }
 
-    @if $variant == 'light' and $topbar == 'dark' {
-      headerbar entry { @extend %sidebar-entry; }
+    @if $variant =='light' and $topbar =='dark' {
+      headerbar entry {
+        @extend %sidebar-entry;
+      }
     }
 
     .nautilus-grid-view {
@@ -134,7 +143,7 @@
         border-radius: $window-radius - $space-size;
       }
 
-      @if $variant == 'light' and $topbar == 'dark' {
+      @if $variant =='light' and $topbar =='dark' {
         margin: 0 $space-size $space-size $space-size;
       }
     }
@@ -146,7 +155,7 @@
         border-radius: $window-radius - $space-size;
       }
 
-      @if $variant == 'light' and $topbar == 'dark' {
+      @if $variant =='light' and $topbar =='dark' {
         margin: 0 $space-size $space-size;
       }
     }
@@ -168,7 +177,7 @@
     .toolbar {
       border-radius: $window-radius - $space-size;
 
-      @if $variant == 'light' and $topbar == 'dark' {
+      @if $variant =='light' and $topbar =='dark' {
         margin: 0 $space-size $space-size / 2;
       }
     }
@@ -176,7 +185,7 @@
     banner > revealer > widget {
       border-radius: $window-radius - $space-size;
 
-      @if $variant == 'light' and $topbar == 'dark' {
+      @if $variant =='light' and $topbar =='dark' {
         margin: 0 $space-size $space-size;
       }
     }
@@ -194,7 +203,7 @@
   }
 
   &:not(.view) headerbar {
-    @if $sidebar == 'normal' {
+    @if $sidebar =='normal' {
       border-bottom: 1px solid $border;
     }
   }
@@ -223,11 +232,11 @@
   }
 
   #NautilusPathBar {
-    background-color: if($sidebar == 'styled', $titlebar-fill, $fill);
+    background-color: if($sidebar =='styled', $titlebar-fill, $fill);
 
     #NautilusPathButton {
       &.current-dir {
-        color: if($sidebar == 'styled', $titlebar-text, $text);
+        color: if($sidebar =='styled', $titlebar-text, $text);
       }
     }
   }
@@ -251,14 +260,60 @@
   }
 }
 
-#NautilusViewCell {
-  clamp box {
-    margin: 0;
-    border-spacing: 0;
+.nautilus-grid-view {
+  child.activatable {
+    padding: 0;
+    border-radius: $corner-radius * 2;
+
+    #NautilusViewCell {
+      padding: $space-size;
+
+      .icon-ui-labels-box {
+        margin: 0 0 $space-size;
+        border-spacing: 0;
+      }
+
+      .dim-label {
+        color: $text-secondary;
+        margin: 0;
+      }
+    }
   }
 }
 
-#NautilusQueryEditor { // search entry
+.nautilus-list-view {
+  padding: 0;
+  margin: 0;
+  border-spacing: 0;
+
+  listview.view {
+    padding: 0;
+    margin: 0;
+    border-spacing: $space-size / 2;
+
+    > row.activatable {
+      padding: 0;
+      margin: 0;
+      border-radius: $corner-radius;
+
+      > cell {
+        padding: 0;
+
+        > widget#NautilusViewCell {
+          padding: $space-size / 2 $space-size * 1.5;
+        }
+      }
+
+      &:nth-child(odd):not(:disabled) {
+        background-image: image(gtkalpha(currentColor, 0.03));
+      }
+    }
+  }
+}
+
+#NautilusQueryEditor {
+
+  // search entry
   > menubutton {
     margin: 0;
 
@@ -269,7 +324,9 @@
     }
   }
 
-  > text { margin: 0; }
+  > text {
+    margin: 0;
+  }
 }
 
 #NautilusPathBar {
@@ -287,7 +344,9 @@
       }
     }
 
-    &:first-child { margin-left: 0; }
+    &:first-child {
+      margin-left: 0;
+    }
   }
 
   > menubutton {
@@ -326,7 +385,9 @@ window.dialog {
 // Calculator
 //
 
-.history-view { background-color: $base; }
+.history-view {
+  background-color: $base;
+}
 
 #displayitem {
   border-top: 1px solid $border;
@@ -535,7 +596,9 @@ datechooser {
     margin-left: $space-size;
     margin-bottom: $space-size;
 
-    label { font-weight: bold; }
+    label {
+      font-weight: bold;
+    }
 
     button.flat, button.image-button {
       min-height: $medium-size;
@@ -578,27 +641,36 @@ datechooser {
       color: on($primary);
       font-weight: bold;
 
-      dot { background-color: on($primary); }
+      dot {
+        background-color: on($primary);
+      }
     }
 
     &.today {
       color: $primary;
 
-      dot { background-color: $primary; }
+      dot {
+        background-color: $primary;
+      }
     }
 
     &.other-month {
+
       &:not(:hover),
       &:backdrop {
         color: $text-secondary-disabled;
 
-        dot { background-color: $text-secondary-disabled; }
+        dot {
+          background-color: $text-secondary-disabled;
+        }
       }
 
       &:hover:not(:backdrop) {
         color: $text-disabled;
 
-        dot { background-color: $text-disabled; }
+        dot {
+          background-color: $text-disabled;
+        }
       }
     }
   }
@@ -672,10 +744,14 @@ monthcell {
       background-color: gtkalpha($primary, 0.2);
     }
 
-    label.day-label { font-weight: bold; }
+    label.day-label {
+      font-weight: bold;
+    }
   }
 
-  &:nth-child(7n + 1) { border-left-width: 0; }
+  &:nth-child(7n + 1) {
+    border-left-width: 0;
+  }
 
   &.today {
     background-color: gtkalpha($primary, 0.2);
@@ -746,7 +822,9 @@ monthpopover > box {
 
 // Agenda View CSS
 agenda-view list {
-  &.background { background-color: transparent; }
+  &.background {
+    background-color: transparent;
+  }
 
   > row {
     padding: 2px $space-size * 2;
@@ -780,7 +858,7 @@ menubutton stack > box {
   border-spacing: $space-size;
 }
 
-@if $sidebar == 'styled' {
+@if $sidebar =='styled' {
   window:not(.nautilus-window) > dialog-host toastoverlay navigation-split-view.drop-target .sidebar-pane {
     background-color: $base-alt;
     color: $text;
@@ -805,7 +883,7 @@ menubutton stack > box {
   toolbarview.undershoot-top calendar-view scrolledwindow {
     @include undershoot(top, $style: 'compact');
   }
-  
+
   toolbarview.undershoot-bottom calendar-view scrolledwindow {
     @include undershoot(bottom, $style: 'compact');
   }
@@ -985,24 +1063,25 @@ screenshot-carousel box.frame.view {
 }
 
 .category-tile.category-work {
-  padding: 1px; /* FIXME: work around https://gitlab.gnome.org/GNOME/gtk/-/issues/4324 */
+  padding: 1px;
+  /* FIXME: work around https://gitlab.gnome.org/GNOME/gtk/-/issues/4324 */
   color: #1c71d8;
-  background-color:#fdf8d7;
+  background-color: #fdf8d7;
   background-image: linear-gradient($border 1px, transparent 1px),
-                    linear-gradient(90deg, $border 1px, transparent 1px);
+    linear-gradient(90deg, $border 1px, transparent 1px);
   background-size: 10px 10px, 10px 10px;
   background-position: -1px -4px, center -1px;
 
   &:hover {
     background-color: lighten(#fdf8d7, 5%);
     background-image: linear-gradient($border 1px, transparent 1px),
-                      linear-gradient(90deg, $border 1px, transparent 1px);
+      linear-gradient(90deg, $border 1px, transparent 1px);
   }
 
   &:active {
     background-color: darken(#fdf8d7, 5%);
     background-image: linear-gradient($border 1px, transparent 1px),
-                      linear-gradient(90deg, $border 1px, transparent 1px);
+      linear-gradient(90deg, $border 1px, transparent 1px);
   }
 }
 
@@ -1020,6 +1099,7 @@ screenshot-carousel box.frame.view {
   }
 
   popover.background {
+
     > arrow,
     > contents {
       padding: 0;
@@ -1062,7 +1142,9 @@ window.org-gnome-Builder {
 }
 
 popover.background.global-search {
-  > arrow, > contents { padding: 0; }
+  > arrow, > contents {
+    padding: 0;
+  }
 }
 
 panelframeswitcher {
@@ -1168,7 +1250,9 @@ window.dialog {
       border-radius: 0;
 
       > row {
-        &:first-child, &:last-child { border-radius: 0; }
+        &:first-child, &:last-child {
+          border-radius: 0;
+        }
       }
     }
   }
