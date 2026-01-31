@@ -381,6 +381,80 @@ window.dialog {
   }
 }
 
+preferencesgroup button.accent, // GDM Setting
+
+preferencesgroup button.accent-button {
+  min-height: 24px;
+  min-width: 24px;
+  padding: $space-size / 2;
+  border-radius: $circular-radius;
+  background: var(--accent-bg-color);
+  outline: none;
+  background-clip: content-box;
+  box-shadow: none;
+  border: none;
+
+  &:hover {
+    box-shadow: 0 0 0 3px $divider;
+    background: var(--accent-bg-color);
+    background-clip: content-box;
+  }
+
+  &:checked, &:checked:hover {
+    box-shadow: 0 0 0 3px var(--accent-bg-color);
+    background: var(--accent-bg-color);
+    background-clip: content-box;
+  }
+
+  &.blue,
+  &.teal,
+  &.green,
+  &.yellow,
+  &.orange,
+  &.red,
+  &.pink,
+  &.purple,
+  &.slate {
+    --accent-color: oklab(from var(--accent-bg-color) var(--standalone-color-oklab));
+  }
+
+  &.blue {
+    --accent-bg-color: var(--accent-blue);
+  }
+
+  &.teal {
+    --accent-bg-color: var(--accent-teal);
+  }
+
+  &.green {
+    --accent-bg-color: var(--accent-green);
+  }
+
+  &.yellow {
+    --accent-bg-color: var(--accent-yellow);
+  }
+
+  &.orange {
+    --accent-bg-color: var(--accent-orange);
+  }
+
+  &.red {
+    --accent-bg-color: var(--accent-red);
+  }
+
+  &.pink {
+    --accent-bg-color: var(--accent-pink);
+  }
+
+  &.purple {
+    --accent-bg-color: var(--accent-purple);
+  }
+
+  &.slate {
+    --accent-bg-color: var(--accent-slate);
+  }
+}
+
 //
 // Calculator
 //
@@ -620,7 +694,8 @@ datechooser {
   }
 
   // days
-  button.day, button.day.flat {
+  button.day.text-button,
+  button.day.flat.text-button {
     font-size: 10pt;
     font-weight: normal;
     margin: $space-size / 2;
@@ -636,8 +711,11 @@ datechooser {
       min-width: $space-size / 2;
     }
 
-    &:selected, &.today:selected {
-      background-color: $primary;
+    &:selected,
+    &.today:selected,
+    &:selected:focus,
+    &.today:selected:focus {
+      background-image: color($primary);
       color: on($primary);
       font-weight: bold;
 
@@ -859,6 +937,8 @@ menubutton stack > box {
 }
 
 @if $sidebar =='styled' {
+
+  window:not(.nautilus-window) > dialog-host toastoverlay overlay-split-view.drop-target .sidebar-pane,
   window:not(.nautilus-window) > dialog-host toastoverlay navigation-split-view.drop-target .sidebar-pane {
     background-color: $base-alt;
     color: $text;
